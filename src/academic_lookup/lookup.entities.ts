@@ -1,11 +1,11 @@
-import { Entity, Column, PrimaryGeneratedColumn } from 'typeorm';
+import { Entity, Column, PrimaryColumn } from 'typeorm';
 
 @Entity('look_up')
 export class AcademyLookup {
-  @PrimaryGeneratedColumn('uuid')
-  id: string;
+  @PrimaryColumn('int')
+  id: number;
 
-  @Column()
+  @Column('text')
   lookupName: string;
 
   @Column('json')
