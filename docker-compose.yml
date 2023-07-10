@@ -1,0 +1,44 @@
+version: '3'
+
+services:
+  postgres:
+    image: postgres:latest
+    restart: always
+    ports:
+      - 5432:5432
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: postgres
+    volumes:
+      - postgres-data:/var/lib/postgresql/data
+  redis:
+    image: redis:latest
+    restart: always
+    ports:
+      - '6379:6379'
+    volumes:
+      - cache:/data
+
+  nestjs-app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    restart: always
+    depends_on:
+      - postgres
+      - redis
+    ports:
+      - 3000:3000
+    environment:
+      DATABASE_HOST: postgres
+      POSTGRES_PORT: 5432
+      DATABASE_USERNAME: postgres
+      POSTGRES_PASSWORD: postgres
+      DATABASE_DATABASE: postgres
+      REDIS_HOST: redis
+      REDIS_PORT: 6379
+      REDIS_URL: redis://redis:6379
+volumes:
+  postgres-data:
+  cache:

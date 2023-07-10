@@ -1,0 +1,46 @@
+# ------------------------------------------------------
+# THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
+# ------------------------------------------------------
+
+type StudentEntity {
+  """rollno of the user"""
+  roll_no: Int!
+  phone_number: String!
+  first_name: String!
+  last_name: String!
+  dob: Date!
+  email_id: String!
+  gender: String!
+  country_code: Int!
+  programme: String!
+  course: String!
+  specification: String!
+}
+
+"""Date custom scalar type"""
+scalar Date
+
+type Query {
+  allstudents: [StudentEntity!]!
+  student(roll_no: Int!): StudentEntity!
+}
+
+type Mutation {
+  createStudent(createStudentInput: CreateStudentInput!): StudentEntity!
+  removestudent(roll_no: Int!): String!
+}
+
+input CreateStudentInput {
+  """rollno of the user"""
+  roll_no: Int!
+  phone_number: String!
+  first_name: String!
+  last_name: String!
+  dob: Date!
+  email_id: String!
+  gender: String!
+  country_code: Int!
+  programme: String!
+  course: String!
+  specification: String!
+}
